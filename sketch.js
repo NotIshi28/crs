@@ -1,10 +1,13 @@
 var car, wall;
 var speed, weight;
 var deformation;
-var blue;
+var red,red_car, yellow, yellow_car, green, green_car, blue;
 
 function preload() {
   blue = loadImage("car.png");
+  red = loadImage("red_car.png");
+  yellow = loadImage("yellow_car.png");
+  green = loadImage("red_car.png");
 }
 
 function setup() {
@@ -24,9 +27,23 @@ function draw() {
   background(255,255,255);
   
   if(car.isTouching(wall)){
-    deformation = (0.2 * weight * speed * speed * speed/ 500);
+    deformation = (0.5 * weight * speed * speed / 22500);
 
-    //add different 
+    if(deformation < 100){
+      car.visible = false;
+      green_car = createSprite(1300,200,30,30);
+      green_car.addImage("good", green);
+     }
+     else if(deformation > 100 && deformation < 180){
+      car.visible = false;
+      yellow_car = createSprite(1300,200,30,30);
+      yellow_car.addImage("fine", yellow);
+     }
+     else if(deformation > 180){
+      car.visible = false;
+      red_car = createSprite(1300,200,30,30);
+      red_car.addImage("bad", red);
+     }
   }
   car.collide(wall);
 
